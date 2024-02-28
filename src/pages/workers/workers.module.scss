@@ -1,0 +1,28 @@
+.workers{
+  padding: 0 50px;
+  table{
+    border-collapse: collapse;
+    tr{
+      border: 1px solid black;
+      th{
+        padding: 10px;
+        background: gray;
+        color: white;
+        border: 1px solid black;
+      }
+      td{
+        text-align: left;
+        padding: 10px;
+        border: 1px solid black;
+        &.yes{
+          background: green;
+          color: white;
+        }
+        &.no{
+          background: red;
+          color: white;
+        }
+      }
+    }
+  }
+}

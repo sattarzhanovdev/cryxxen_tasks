@@ -1,0 +1,41 @@
+.tasks{
+  padding: 0 50px;
+  table{
+    border-collapse: collapse;
+    tr{
+      border: 1px solid black;
+      th{
+        padding: 10px;
+        background: gray;
+        color: white;
+        border: 1px solid black;
+      }
+      td{
+        text-align: left;
+        padding: 10px;
+        border: 1px solid black;
+        &.frontend{
+          background: orange;
+          color: white;
+        }
+        &.backend{
+          background: green;
+          color: white;
+        }
+        &.design{
+          background: purple;
+          color: white;
+        }
+        &.analytics{
+          background: darkblue;
+          color: white;
+        }
+        &.testing{
+          background: red;
+          color: white;
+        }
+
+      }
+    }
+  }
+}
