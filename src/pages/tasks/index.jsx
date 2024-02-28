@@ -26,7 +26,7 @@ const Tasks = () => {
   }
   return (
     <div className={c.tasks}>
-      <h1>{name}</h1>
+      <h1>Название проекта: {name}</h1>
       <table>
         <tr>
           <th>№</th>
