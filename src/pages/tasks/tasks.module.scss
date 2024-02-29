@@ -2,7 +2,7 @@
   padding: 0 50px;
   .head{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 30px;
     gap: 40px;
     h1{
@@ -17,11 +17,65 @@
       border: none;
       cursor: pointer;
     }
-    select{
-      width: 200px;
-      height: 40px;
-      padding: 0 10px;
-      outline: none ;
+    li{
+      list-style: none;
+      text-decoration: underline;
+      margin-top: 10px;
+    }
+    .filters{
+      margin-top: 30px;
+      position: absolute;
+      left: 50px;
+      top: 140px;
+      z-index: 100;
+      display: flex;
+      align-items: flex-start;
+      .filtration{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        .filter{
+          opacity: 0;
+          pointer-events: all;
+          background: wheat;
+          p{
+            margin: 0;
+            margin-bottom: 10px;
+          }
+          select{
+            width: 200px;
+            height: 40px;
+            padding: 0 10px;
+            outline: none ;
+            z-index: 100;
+            &.active{
+              opacity: 100;
+              pointer-events: all;
+            }
+          }
+        }
+        .active{
+          opacity: 100;
+          pointer-events: all;
+          background: wheat;
+          padding: 10px;
+          p{
+            margin: 0;
+            margin-bottom: 10px;
+          }
+          select{
+            width: 200px;
+            height: 40px;
+            padding: 0 10px;
+            outline: none ;
+            z-index: 100;
+            &.active{
+              opacity: 100;
+              pointer-events: all;
+            }
+          }
+        }
+      }
     }
   }
   table{

@@ -7,30 +7,48 @@ import {useDownloadExcel} from 'react-export-table-to-excel'
 
 const Tasks = () => {
   const [ tasks,setTasks ] = React.useState(null)
-  const [ selectValue,setSelectValue ] = React.useState('Все')
+  const [ filterState,setFilterState ] = React.useState(false)
+  const [ status,setStatus ] = React.useState('Все')
+  const [ type,setType ] = React.useState('Все')
+  const [ dep,setDep ] = React.useState(0)
   const {name} = useParams()
+
+  let params = {
+    status: status,
+    type: type
+  }
 
   React.useEffect(() => {
     api.getTasks()
       .then(res => {
-        if(selectValue === 'Все'){
-          const projectsTasks = res.data.filter(item => item.project?.name === name)
-          setTasks(projectsTasks)
+        const projectsTasks = res.data.filter(item => item.project?.name === name)
+        setTasks(projectsTasks)
+        if(params.status === 'Все'){
+          if(params.type !== "Все"){
+            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
+            setTasks(filteredTasks)
+          }else{
+            setTasks(projectsTasks)
+          }
+        }else if(params.type === 'Все'){
+          if(params.status !== "Все"){
+            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status)
+            setTasks(filteredTasks)
+          }else{
+            setTasks(projectsTasks)
+          }
         }else{
-          const projectsTasks = res.data.filter(item => item.project?.name === name)
-          const filteredTasks = projectsTasks.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === selectValue)
+          const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status && item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
           setTasks(filteredTasks)
         }
       })
-  }, [selectValue])
-
+  }, [dep])
+  
   const convertToDate = (timestamp) => {
     if(timestamp){
       const date = new Date(timestamp)
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      console.log(date.getMonth());
       const formatted = new Intl.DateTimeFormat('ru-RU', options).format(date);
-      // return `${date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()}.${date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()}.${date.getFullYear()}`
       return formatted
     }else{
       return 'Нету срока!'
@@ -50,22 +68,64 @@ const Tasks = () => {
       <div className={c.head}>
         <h1>Название проекта: {name}</h1>
         <button onClick={onDownload}>Экспорт в таблицы</button>
-        <select onChange={e => setSelectValue(e.target.value)}>
-          <option selected>Все</option>
-          <option>В ожидании</option>
-          <option>Новая</option>
-          <option>На аналитику</option>
-          <option>Аналитика</option>
-          <option>К работе</option>
-          <option>В работе</option>
-          <option>code review</option>
-          <option>На тестирование</option>
-          <option>Тестирование</option>
-          <option>На доработку</option>
-          <option>Приемка</option>
-          <option>Релиз</option>
-          <option>Закрыто</option>
-        </select>
+          <li onClick={() => setFilterState(!filterState)}>
+            Фильтрация
+          </li>
+        <div className={c.filters}>
+          <div className={c.filtration}>
+            <div 
+              className={filterState ? c.active : c.filter}
+            >
+              <p>
+                Фильтрация по статусам
+              </p>
+              <select 
+                onChange={e => {
+                  setStatus(e.target.value)
+                  setDep(Math.random())
+                }} 
+              >
+                <option selected>Все</option>
+                <option>В ожидании</option>
+                <option>Новая</option>
+                <option>На аналитику</option>
+                <option>Аналитика</option>
+                <option>К работе</option>
+                <option>В работе</option>
+                <option>code review</option>
+                <option>На тестирование</option>
+                <option>Тестирование</option>
+                <option>На доработку</option>
+                <option>Приемка</option>
+                <option>Релиз</option>
+                <option>Закрыто</option>
+              </select> 
+            </div>
+          </div>
+          <div className={c.filtration}>
+            <div 
+              className={filterState ? c.active : c.filter}
+            >
+              <p>
+                Фильтрация по виду задач
+              </p>
+              <select 
+                onChange={e => {
+                  setType(e.target.value)
+                  setDep(Math.random())
+                }} 
+              >
+                <option selected>Все</option>
+                <option>Frontend</option>
+                <option>Backend</option>
+                <option>Design</option>
+                <option>Analytics</option>
+                <option>API</option>
+                <option>Testing</option>
+              </select> 
+            </div>
+          </div>
+        </div>
       </div>
       <table ref={tableRef}>
         <tr>
