@@ -2,6 +2,7 @@ import React from 'react'
 import c from './projects.module.scss'
 import { api } from '../../api'
 import { useNavigate } from 'react-router-dom'
+import { useDownloadExcel } from 'react-export-table-to-excel'
 
 const Projects = () => {
   const [ projects,setProjects ] = React.useState(null)
@@ -12,9 +13,18 @@ const Projects = () => {
   }, [])
 
   const Navigate = useNavigate()
+
+  const tableRef = React.useRef(null)
+
+  const {onDownload} = useDownloadExcel({
+    currentTableRef:tableRef.current,
+    filename: 'Проекты',
+    sheet: 'UserData'
+  })
   return (
     <div className={c.projects}>
-      <table>
+      <button onClick={onDownload}>Экспорт в таблицы</button>
+      <table ref={tableRef}>
         <tr>
           <th>№</th>
           <th>Название</th>

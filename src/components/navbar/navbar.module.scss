@@ -3,7 +3,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 15px 50px;
+  border-bottom: 1px solid black;
+  margin-bottom: 30px;
 
+  h1{
+    margin: 0;
+  }
   ul{
     display: flex;
     align-items: center;
@@ -11,7 +16,7 @@
     li{
       list-style: none;
       a{
-        text-decoration: none;
+        color: black;
       }
     }
   }

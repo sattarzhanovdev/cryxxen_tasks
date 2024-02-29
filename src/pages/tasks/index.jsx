@@ -2,19 +2,27 @@ import React from 'react'
 import { api } from '../../api'
 import { useParams } from 'react-router-dom'
 import c from './tasks.module.scss'
+import {useDownloadExcel} from 'react-export-table-to-excel'
+
 
 const Tasks = () => {
   const [ tasks,setTasks ] = React.useState(null)
+  const [ selectValue,setSelectValue ] = React.useState('Все')
   const {name} = useParams()
 
   React.useEffect(() => {
     api.getTasks()
       .then(res => {
-        const projectsTasks = res.data.filter(item => item.project?.name === name)
-        setTasks(projectsTasks)
-        console.log(projectsTasks);
+        if(selectValue === 'Все'){
+          const projectsTasks = res.data.filter(item => item.project?.name === name)
+          setTasks(projectsTasks)
+        }else{
+          const projectsTasks = res.data.filter(item => item.project?.name === name)
+          const filteredTasks = projectsTasks.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === selectValue)
+          setTasks(filteredTasks)
+        }
       })
-  }, [])
+  }, [selectValue])
 
   const convertToDate = (timestamp) => {
     if(timestamp){
@@ -28,10 +36,38 @@ const Tasks = () => {
       return 'Нету срока!'
     }
   }
+
+  const tableRef = React.useRef(null)
+
+  const {onDownload} = useDownloadExcel({
+    currentTableRef:tableRef.current,
+    filename: name,
+    sheet: 'UserData'
+  })
+
   return (
     <div className={c.tasks}>
-      <h1>Название проекта: {name}</h1>
-      <table>
+      <div className={c.head}>
+        <h1>Название проекта: {name}</h1>
+        <button onClick={onDownload}>Экспорт в таблицы</button>
+        <select onChange={e => setSelectValue(e.target.value)}>
+          <option selected>Все</option>
+          <option>В ожидании</option>
+          <option>Новая</option>
+          <option>На аналитику</option>
+          <option>Аналитика</option>
+          <option>К работе</option>
+          <option>В работе</option>
+          <option>code review</option>
+          <option>На тестирование</option>
+          <option>Тестирование</option>
+          <option>На доработку</option>
+          <option>Приемка</option>
+          <option>Релиз</option>
+          <option>Закрыто</option>
+        </select>
+      </div>
+      <table ref={tableRef}>
         <tr>
           <th>№</th>
           <th>Название</th>

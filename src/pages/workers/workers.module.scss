@@ -1,5 +1,15 @@
 .workers{
   padding: 0 50px;
+  button{
+    width: 150px;
+    height: 40px;
+    background: green;
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    border: none;
+    cursor: pointer;
+  }
   table{
     border-collapse: collapse;
     tr{

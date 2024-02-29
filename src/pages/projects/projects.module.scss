@@ -1,5 +1,15 @@
 .projects{
   padding: 0 50px;
+  button{
+    width: 150px;
+    height: 40px;
+    background: green;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 30px;
+    cursor: pointer;
+  }
   table{
     border-collapse: collapse;
     tr{
@@ -16,6 +26,7 @@
         border: 1px solid black;
         &.click{
           cursor: pointer;
+          background: rgba(255, 150, 150, 0.356);
         }
       }
     }

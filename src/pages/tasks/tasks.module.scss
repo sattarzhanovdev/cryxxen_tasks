@@ -1,5 +1,29 @@
 .tasks{
   padding: 0 50px;
+  .head{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 40px;
+    h1{
+      margin: 0;
+    }
+    button{
+      width: 150px;
+      height: 40px;
+      background: green;
+      color: white;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    select{
+      width: 200px;
+      height: 40px;
+      padding: 0 10px;
+      outline: none ;
+    }
+  }
   table{
     border-collapse: collapse;
     tr{

@@ -1,6 +1,7 @@
 import React from 'react'
 import { api } from '../../api'
 import c from './workers.module.scss'
+import { useDownloadExcel } from 'react-export-table-to-excel'
 
 const Workers = () => {
   const [ workers,setWorkers ] = React.useState(null)
@@ -9,9 +10,18 @@ const Workers = () => {
     api.getWorkers()
       .then(res => setWorkers(res.data))
   }, [])
+
+  const tableRef = React.useRef(null)
+
+  const {onDownload} = useDownloadExcel({
+    currentTableRef:tableRef.current,
+    filename: 'Сотрудники',
+    sheet: 'UserData'
+  })
   return (
     <div className={c.workers}>
-      <table>
+      <button onClick={onDownload}>Экспорт в таблицы</button>
+      <table ref={tableRef}>
         <tr>
           <th>
             №
