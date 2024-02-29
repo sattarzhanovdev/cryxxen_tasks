@@ -19,7 +19,11 @@ const Tasks = () => {
   const convertToDate = (timestamp) => {
     if(timestamp){
       const date = new Date(timestamp)
-      return `${date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()}.${date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()}.${date.getFullYear()}`
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      console.log(date.getMonth());
+      const formatted = new Intl.DateTimeFormat('ru-RU', options).format(date);
+      // return `${date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()}.${date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()}.${date.getFullYear()}`
+      return formatted
     }else{
       return 'Нету срока!'
     }
@@ -31,8 +35,10 @@ const Tasks = () => {
         <tr>
           <th>№</th>
           <th>Название</th>
+          <th>Дата начала</th>
           <th>Срок</th>
           <th>Оценка</th>
+          <th>Затраченное время</th>
           <th>Постановщик</th>
           <th>{name !== 'CRYXXEN' ? 'Разработчик' : 'Исполнитель'}</th>
           <th>Вид задачи</th>
@@ -49,10 +55,16 @@ const Tasks = () => {
                 {item.summary}
               </td>
               <td>
+                {convertToDate(item.customFields?.find(item => item.name === 'Дата начала')?.value)}  
+              </td>
+              <td>
                 {convertToDate(item.customFields?.find(item => item.name === 'Due Date')?.value)}  
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Оценка')?.value?.minutes }  
+              </td>
+              <td>
+                {item.customFields?.find(item => item.name === 'Затраченное время')?.value?.presentation }  
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Постановщик')?.value?.name }  
@@ -109,10 +121,16 @@ const Tasks = () => {
                 {item.summary}
               </td>
               <td>
+                {convertToDate(item.customFields?.find(item => item.name === 'Дата начала')?.value)}  
+              </td>
+              <td>
                 {convertToDate(item.customFields?.find(item => item.name === 'Due Date')?.value)}  
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Оценка')?.value?.minutes }  
+              </td>
+              <td>
+                {item.customFields?.find(item => item.name === 'Затраченное время')?.value?.presentation }  
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Постановщик')?.value?.name }  
