@@ -1,8 +1,9 @@
 import React from 'react'
 import { api } from '../../api'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import c from './tasks.module.scss'
 import {useDownloadExcel} from 'react-export-table-to-excel'
+import axios from 'axios'
 
 
 const Tasks = () => {
@@ -18,31 +19,47 @@ const Tasks = () => {
     type: type
   }
 
+  const token = 'eu9qSW3BVrevJsoljX_8d0smafpQXOPhdg08zmDYg!Vz5mfOFZxRMaMdnFZlzMkr'
+  const Navigate = useNavigate()
+
   React.useEffect(() => {
-    api.getTasks()
-      .then(res => {
-        const projectsTasks = res.data.filter(item => item.project?.name === name)
-        setTasks(projectsTasks)
-        if(params.status === 'Все'){
-          if(params.type !== "Все"){
-            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
-            setTasks(filteredTasks)
+    const auth = localStorage.getItem('projectAuth')
+
+    if(auth !== name){
+      Navigate('/auth/')
+    }else{
+      api.getTasks()
+        .then(res => {
+          const projectsTasks = res.data.filter(item => item.project?.name === name)
+          setTasks(projectsTasks)
+          api.getActivities(res.data[0].id) 
+            .then(res => console.log(res.data))
+          if(params.status === 'Все'){
+            if(params.type !== "Все"){
+              const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
+              setTasks(filteredTasks)
+            }else{
+              setTasks(projectsTasks)
+            }
+          }else if(params.type === 'Все'){
+            if(params.status !== "Все"){
+              const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status)
+              setTasks(filteredTasks)
+            }else{
+              setTasks(projectsTasks)
+            }
           }else{
-            setTasks(projectsTasks)
-          }
-        }else if(params.type === 'Все'){
-          if(params.status !== "Все"){
-            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status)
+            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status && item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
             setTasks(filteredTasks)
-          }else{
-            setTasks(projectsTasks)
           }
-        }else{
-          const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status && item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
-          setTasks(filteredTasks)
-        }
-      })
+        })
+    }
+
+    console.log(tasks);
   }, [dep])
+
+ 
+
   
   const convertToDate = (timestamp) => {
     if(timestamp){

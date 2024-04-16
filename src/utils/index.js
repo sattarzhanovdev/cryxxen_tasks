@@ -40,4 +40,96 @@ export const PUBLIC_ROUTES = [
     route: '/projects/:name/tasks/',
     page: <Pages.Tasks/>,
   },
+  {
+    id:5,
+    route: '/auth/',
+    page: <Pages.Auth />
+  }
+]
+
+export const PAGE_AUTH = [
+  {
+    name: 'Binteq',
+    login: 'binteq',
+    password: 'binteq',
+    path: '/projects/Binteq/tasks/'
+  },
+  {
+    name: 'CRNsite',
+    login: 'crnsite',
+    password: 'crnsite',
+    path: '/projects/CRNsite/tasks/'
+  },
+  {
+    name: 'CRYXXEN',
+    login: 'cryxxen',
+    password: 'cryxxen',
+    path: '/projects/CRYXXEN/tasks/'
+  },
+  {
+    name: 'Dagestan Tour',
+    login: 'dagestan_tour',
+    password: 'dagestan_tour',
+    path: '/projects/Dagestan%20Tour/tasks/'
+  },
+  {
+    name: 'DevOps',
+    login: 'devops',
+    password: 'devops',
+    path: '/projects/DevOps/tasks/'
+  },
+  {
+    name: 'DS PRO',
+    login: 'ds_pro',
+    password: 'ds_pro',
+    path: '/projects/DS%20PRO/tasks/'
+  },
+  {
+    name: 'Eilbay',
+    login: 'eilbay',
+    password: 'eilbay',
+    path: '/projects/Eilbay/tasks/'
+  },
+  {
+    name: 'HMI Graphic Editor',
+    login: 'hmi',
+    password: 'hmi',
+    path: '/projects/HMI%20Graphic%20Editor/tasks/'
+  },
+  {
+    name: 'Lou App',
+    login: 'lou_app',
+    password: 'lou_app',
+    path: '/projects/Lou%20App/tasks/'
+  },
+  {
+    name: 'RegLab',
+    login: 'reglab',
+    password: 'reglab',
+    path: '/projects/RegLab/tasks/'
+  },
+  {
+    name: 'Tamyr',
+    login: 'tamyr',
+    password: 'tamyr',
+    path: '/projects/Tamyr/tasks/'
+  },
+  {
+    name: 'Testing Projects',
+    login: 'testing',
+    password: 'testing',
+    path: '/projects/Testing%20Projects/tasks/'
+  },
+  {
+    name: 'Window Manager',
+    login: 'wm',
+    password: 'wm',
+    path: '/projects/Window%20Manager/tasks/'
+  },
+  {
+    name: 'Тестовый проект',
+    login: 'test',
+    password: 'test',
+    path: '/projects/Тестовый%20проект/tasks/'
+  }
 ]

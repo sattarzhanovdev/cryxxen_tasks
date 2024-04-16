@@ -1,0 +1,22 @@
+.auth{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  div{
+    input{
+      width: 300px;
+      height: 40px;
+      padding: 0 15px;
+    }
+  }
+  button{
+    width: 334px;
+    height: 40px;
+    background: green;
+    color: white;
+    cursor: pointer;
+    border: 0;
+  }
+}
