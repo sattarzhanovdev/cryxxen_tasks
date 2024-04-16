@@ -1,0 +1,86 @@
+[
+  {
+    "login": "binteq",
+    "name": "Binteq",
+    "password": "binteq",
+    "path": "/projects/Binteq/tasks/"
+  },
+  {
+    "login": "crnsite",
+    "name": "CRNsite",
+    "password": "crnsite",
+    "path": "/projects/CRNsite/tasks/"
+  },
+  {
+    "login": "cryxxen",
+    "name": "CRYXXEN",
+    "password": "cryxxen",
+    "path": "/projects/CRYXXEN/tasks/"
+  },
+  {
+    "login": "dagestan_tour",
+    "name": "Dagestan Tour",
+    "password": "dagestan_tour",
+    "path": "/projects/Dagestan%20Tour/tasks/"
+  },
+  {
+    "login": "devops",
+    "name": "DevOps",
+    "password": "devops",
+    "path": "/projects/DevOps/tasks/"
+  },
+  {
+    "login": "ds_pro",
+    "name": "DS PRO",
+    "password": "ds_pro",
+    "path": "/projects/DS%20PRO/tasks/"
+  },
+  {
+    "login": "eilbay",
+    "name": "Eilbay",
+    "password": "eilbay",
+    "path": "/projects/Eilbay/tasks/"
+  },
+  {
+    "login": "hmi",
+    "name": "HMI Graphic Editor",
+    "password": "hmi",
+    "path": "/projects/HMI%20Graphic%20Editor/tasks/"
+  },
+  {
+    "login": "lou_app",
+    "name": "Lou App",
+    "password": "lou_app",
+    "path": "/projects/Lou%20App/tasks/"
+  },
+  {
+    "login": "reglab",
+    "name": "RegLab",
+    "password": "reglab",
+    "path": "/projects/RegLab/tasks/"
+  },
+  {
+    "login": "tamyr",
+    "name": "Tamyr",
+    "password": "tamyr",
+    "path": "/projects/Tamyr/tasks/"
+  },
+  {
+    "login": "testing",
+    "name": "Testing Projects",
+    "password": "testing",
+    "path": "/projects/Testing%20Projects/tasks/"
+  },
+  {
+    "login": "wm",
+    "name": "Window Manager",
+    "password": "wm",
+    "path": "/projects/Window%20Manager/tasks/"
+  },
+  {
+    "login": "test",
+    "name": "Тестовый проект",
+    "password": "test",
+    "path": "/projects/Тестовый%20проект/tasks/"
+  }
+]

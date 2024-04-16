@@ -1,4 +1,5 @@
 import { Pages } from "../pages";
+import Admin from './../pages/admin/index';
 
 export const navlist = [
   {
@@ -10,6 +11,11 @@ export const navlist = [
     id:2,
     title: 'Проекты',
     path: '/projects/'
+  },
+  {
+    id:3,
+    title: 'Админ',
+    path: '/auth/'
   },
 ]
 
@@ -44,6 +50,16 @@ export const PUBLIC_ROUTES = [
     id:5,
     route: '/auth/',
     page: <Pages.Auth />
+  },
+  {
+    id:6,
+    route: '/admin/',
+    page: <Pages.Admin />
+  },
+  {
+    id:7,
+    route: '/change/',
+    page: <Pages.Change />
   }
 ]
 
