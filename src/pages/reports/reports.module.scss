@@ -1,0 +1,87 @@
+.reports{
+  padding: 0 50px;
+  .filteration{
+    pointer-events: all;
+    padding: 30px 0;
+    p{
+      margin: 0;
+      margin-bottom: 10px;
+    }
+    select{
+      width: 200px;
+      height: 40px;
+      padding: 0 10px;
+      outline: none ;
+      z-index: 100;
+      &.active{
+        opacity: 100;
+        pointer-events: all;
+      }
+    }
+    .active{
+      opacity: 100;
+      pointer-events: all;
+      background: wheat;
+      padding: 10px;
+      p{
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      select{
+        width: 200px;
+        height: 40px;
+        padding: 0 10px;
+        outline: none ;
+        z-index: 100;
+        &.active{
+          opacity: 100;
+          pointer-events: all;
+        }
+      }
+    }
+  }
+  table{
+    border-collapse: collapse;
+    tr{
+      border: 1px solid black;
+      th{
+        padding: 10px;
+        background: gray;
+        color: white;
+        border: 1px solid black;
+        &.right{
+          text-align: right;
+        }
+        &.left{
+          text-align: left;
+        }
+      }
+      td{
+        text-align: left;
+        padding: 10px;
+        border: 1px solid black;
+        &.frontend{
+          background: orange;
+          color: white;
+        }
+        &.backend{
+          background: green;
+          color: white;
+        }
+        &.design{
+          background: purple;
+          color: white;
+        }
+        &.analytics{
+          background: darkblue;
+          color: white;
+        }
+        &.testing{
+          background: red;
+          color: white;
+        }
+
+      }
+    }
+  }
+}

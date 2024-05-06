@@ -5,6 +5,7 @@ import Tasks from './tasks/index';
 import Auth from './auth';
 import Admin from './admin';
 import Change from './change';
+import Reports from './reports';
 
 export const Pages = {
   Main,
@@ -13,5 +14,6 @@ export const Pages = {
   Tasks,
   Auth,
   Admin,
-  Change
+  Change,
+  Reports
 }
