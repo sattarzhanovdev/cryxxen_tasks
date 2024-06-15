@@ -6,22 +6,26 @@ const Reports = () => {
   const [ workers, setWorkers ] = React.useState(null)
   const [ tasks, setTasks ] = React.useState(null)
   const [ type, setType ] = React.useState('Anvar Baratov')
-  const [ status, setStatus ] = React.useState(null)
-  const [ dep, setDep ] = React.useState(null)
-  const [ sum, setSum ] = React.useState(0)
+  const [ status, setStatus ] = React.useState('Все')
+  const [ projects, setProjects ] = React.useState(null)
+  const [ project, setProject ] = React.useState('Все')
 
   React.useEffect(() => {
     api.getWorkers()
-      .then(res => setWorkers(res.data))
+      .then(res => {
+        setWorkers(res.data)
+      })
 
     api.getTasks()
       .then(res => {
-        const result = res.data.filter(item => item.customFields?.find(item => item.name === 'Assignee')?.value?.name === type && status !== 'Все' ? item.customFields?.find(item => item.name === 'State')?.value?.name === status : item.customFields?.find(item => item.name === 'Assignee')?.value?.name === type)
-        setTasks(result)
+        setTasks(res.data)
       })
 
-    console.log(tasks);
-  }, [dep])
+    api.getProjects()
+      .then(res => {
+        setProjects(res.data);
+      })
+  }, [])
 
    const convertToDate = (timestamp) => {
     if(timestamp){
@@ -62,6 +66,26 @@ const Reports = () => {
     return totalMinutes;
   }
 
+  const result = tasks?.filter(item => {
+    const assignee = item.customFields?.find(cf => cf.name === 'Assignee')?.value?.name;
+    const state = item.customFields?.find(cf => cf.name === 'State')?.value?.name;
+    
+    if (project === 'Все' && status === 'Все') {
+      return assignee === type;
+    } else if (project === 'Все') {
+      return assignee === type && state === status; 
+    } else if (status === 'Все') {
+      return assignee === type && item.project.name === project;
+    } else {
+      return assignee === type && state === status && item.project.name === project;
+    }
+  });
+
+  console.log(result);
+  console.log(status);
+
+
+
   return (
     <div className={c.reports}>
       <div className={c.filteration}>
@@ -73,7 +97,6 @@ const Reports = () => {
             onChange={e => {
               setStatus('Все')
               setType(e.target.value)
-              setDep(Math.random())
             }} 
           >
             {
@@ -82,11 +105,11 @@ const Reports = () => {
               ))
             }
           </select> 
+
           <select 
             value={status}
             onChange={e => {
               setStatus(e.target.value)
-              setDep(Math.random())
             }} 
           >
             <option selected>Все</option>
@@ -104,6 +127,18 @@ const Reports = () => {
             <option>Релиз</option>
             <option>Закрыто</option>
           </select> 
+
+          <select
+            value={project}
+            onChange={(e) => setProject(e.target.value)}
+          >
+            <option>Все</option>
+            {
+              projects && projects?.map(item => (
+                <option>{item.name}</option>
+              ))
+            }
+          </select>
         </div>
       </div>
       <table>
@@ -119,7 +154,7 @@ const Reports = () => {
           <th>Трудозатраты</th>
         </tr>
         {
-          tasks?.map((item, i) => (
+          result?.map((item, i) => (
             <tr key={i}>
               <td>
                 {i+1}
@@ -182,3 +217,7 @@ const Reports = () => {
 }
 
 export default Reports
+
+
+
+// с 21:26 по 

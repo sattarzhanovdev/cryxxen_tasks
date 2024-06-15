@@ -6,6 +6,7 @@ import Auth from './auth';
 import Admin from './admin';
 import Change from './change';
 import Reports from './reports';
+import Courses from './courses';
 
 export const Pages = {
   Main,
@@ -15,5 +16,6 @@ export const Pages = {
   Auth,
   Admin,
   Change,
-  Reports
+  Reports,
+  Courses
 }

@@ -1,5 +1,7 @@
 import { Pages } from "../pages";
+import Introduction from "../pages/courses/introduction/introduction";
 import Admin from './../pages/admin/index';
+import KtoTakoiProektnyiManager from "../pages/courses/kto-takoi-proektnyi-manager";
 
 export const navlist = [
   {
@@ -21,6 +23,11 @@ export const navlist = [
     id:4,
     title: 'Админ',
     path: '/auth/'
+  },
+  {
+    id:5,
+    title: 'Обучение и курсы',
+    path: '/courses/'
   },
 ]
 
@@ -64,12 +71,27 @@ export const PUBLIC_ROUTES = [
   {
     id:7,
     route: '/change/',
-    page: <Pages.Change />
+    page: <Pages.Change />  
   },
   {
     id:8,
     route: '/reports/',
     page: <Pages.Reports />
+  },
+  {
+    id:9,
+    route: '/courses/',
+    page: <Pages.Courses />
+  },
+  {
+    id:10,
+    route: '/courses/vvedenie/',
+    page: <Introduction />
+  },
+  {
+    id:11,
+    route: '/courses/kto-takoi-proektnyi-manager/',
+    page: <KtoTakoiProektnyiManager />
   }
 ]
 
