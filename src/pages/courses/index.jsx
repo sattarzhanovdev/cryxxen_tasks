@@ -76,7 +76,7 @@ const Courses = () => {
                 onClick={() => Navigate('/courses/intstrumenty-proektnogo-managera/')}
               >
                 <h3>2. Модуль 2. Инструменты проектного менеджера (1 задание)</h3>
-                <h4>3 урока</h4>
+                <h4>1 урока</h4>
               </div>
               <div 
                 className={c.time}

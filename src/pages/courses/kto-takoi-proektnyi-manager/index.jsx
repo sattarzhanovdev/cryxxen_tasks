@@ -20,6 +20,32 @@ const KtoTakoiProektnyiManager = () => {
     }
   };
 
+  const handleTimeUpdate = () => {
+    if (audioRef.current && videoRef.current) {
+      audioRef.current.currentTime = videoRef.current.currentTime;
+    }
+  };
+
+  const handleSeeked = () => {
+    if (audioRef.current && videoRef.current) {
+      audioRef.current.currentTime = videoRef.current.currentTime;
+    }
+  };
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      video.addEventListener('timeupdate', handleTimeUpdate);
+      video.addEventListener('seeked', handleSeeked);
+
+      return () => {
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+        video.removeEventListener('seeked', handleSeeked);
+      };
+    }
+  }, []);
+
   return (
     <div className={c.course}>
       <h2>1/1 Вебинар</h2>

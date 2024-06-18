@@ -2,6 +2,7 @@ import { Pages } from "../pages";
 import Introduction from "../pages/courses/introduction/introduction";
 import Admin from './../pages/admin/index';
 import KtoTakoiProektnyiManager from "../pages/courses/kto-takoi-proektnyi-manager";
+import InstrumentyProektnogoManagera from "../pages/courses/instrumenty-proektnogo-managera";
 
 export const navlist = [
   {
@@ -92,6 +93,11 @@ export const PUBLIC_ROUTES = [
     id:11,
     route: '/courses/kto-takoi-proektnyi-manager/',
     page: <KtoTakoiProektnyiManager />
+  },
+  {
+    id: 12,
+    route: '/courses/intstrumenty-proektnogo-managera/',
+    page: <InstrumentyProektnogoManagera />
   }
 ]
 
