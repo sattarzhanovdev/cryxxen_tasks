@@ -81,10 +81,9 @@ const Reports = () => {
     }
   });
 
-  console.log(result);
-  console.log(status);
-
-
+  const toTask = (id) => {
+    window.open(`https://cryxxen.youtrack.cloud/issue/${id}`)
+  }
 
   return (
     <div className={c.reports}>
@@ -149,6 +148,7 @@ const Reports = () => {
           <th>Дата начала</th>
           <th>Срок</th>
           <th>Статус</th>
+          <th>Тип задачи</th>
           <th>Вид задачи</th>
           <th>Исполнитель</th>
           <th>Трудозатраты</th>
@@ -162,7 +162,7 @@ const Reports = () => {
               <td>
                 {item.project.name}
               </td>
-              <td>
+              <td onClick={() => toTask(item.id)}>
                 {item.summary}
               </td>
               <td>
@@ -173,6 +173,9 @@ const Reports = () => {
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'State')?.value?.name }  
+              </td>
+              <td>
+                {item.customFields?.find(item => item.name === 'Type')?.value?.localizedName }  
               </td>
               <td 
                 className={
@@ -208,8 +211,9 @@ const Reports = () => {
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
           <th className={c.right}>Итого:</th>
-          <th className={c.left}>{minutes?.reduce((accumulator, currentValue) => accumulator + currentValue, 0)} м</th>
+          <th className={c.left}>{minutes?.reduce((accumulator, currentValue) => accumulator + currentValue, 0)} мин</th>
         </tr>
       </table>
     </div>

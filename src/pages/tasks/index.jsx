@@ -3,8 +3,6 @@ import { api } from '../../api'
 import { useNavigate, useParams } from 'react-router-dom'
 import c from './tasks.module.scss'
 import {useDownloadExcel} from 'react-export-table-to-excel'
-import axios from 'axios'
-
 
 const Tasks = () => {
   const [ tasks,setTasks ] = React.useState(null)
@@ -19,7 +17,6 @@ const Tasks = () => {
     type: type
   }
 
-  const token = 'eu9qSW3BVrevJsoljX_8d0smafpQXOPhdg08zmDYg!Vz5mfOFZxRMaMdnFZlzMkr'
   const Navigate = useNavigate()
 
   React.useEffect(() => {
@@ -80,6 +77,10 @@ const Tasks = () => {
     sheet: 'UserData'
   })
 
+  const toTask = (id) => {
+    window.open(`https://cryxxen.youtrack.cloud/issue/${id}`)
+  }
+
   return (
     <div className={c.tasks}>
       <div className={c.head}>
@@ -137,6 +138,7 @@ const Tasks = () => {
                 <option>Backend</option>
                 <option>Design</option>
                 <option>Analytics</option>
+                <option>HR&Marketing</option>
                 <option>API</option>
                 <option>Testing</option>
               </select> 
@@ -154,6 +156,7 @@ const Tasks = () => {
           <th>Затраченное время</th>
           <th>Постановщик</th>
           <th>{name !== 'CRYXXEN' ? 'Разработчик' : 'Исполнитель'}</th>
+          <th>Тип задачи</th>
           <th>Вид задачи</th>
           <th>Статус</th>
         </tr>
@@ -164,7 +167,7 @@ const Tasks = () => {
               <td>
                 {i+1}
               </td>
-              <td>
+              <td onClick={() => toTask(item.id)}>
                 {item.summary}
               </td>
               <td>
@@ -184,6 +187,9 @@ const Tasks = () => {
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Разработчик')?.value?.name }  
+              </td>
+              <td>
+                {item.customFields?.find(item => item.name === 'Type')?.value?.localizedName }  
               </td>
               <td 
                 className={
@@ -230,7 +236,7 @@ const Tasks = () => {
               <td>
                 {i+1}
               </td>
-              <td>
+              <td onClick={() => toTask(item.id)}>
                 {item.summary}
               </td>
               <td>
@@ -250,6 +256,9 @@ const Tasks = () => {
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Assignee')?.value?.name }  
+              </td>
+              <td>
+                {item.customFields?.find(item => item.name === 'Type')?.value?.localizedName }  
               </td>
               <td 
                 className={
