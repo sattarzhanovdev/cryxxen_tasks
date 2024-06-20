@@ -3,6 +3,16 @@ import Introduction from "../pages/courses/introduction/introduction";
 import Admin from './../pages/admin/index';
 import KtoTakoiProektnyiManager from "../pages/courses/kto-takoi-proektnyi-manager";
 import InstrumentyProektnogoManagera from "../pages/courses/instrumenty-proektnogo-managera";
+import MetodologiiUpravleniyaProektami from "../pages/courses/metodologii-upravleniya-proektami";
+import NachaloProekta from "../pages/courses/nachalo-proekta";
+import PlanirovanieProekta from "../pages/courses/planirovanie-proekta";
+import TrebovaniyaKPO from "../pages/courses/trebovaniya-k-programmnomu-obespecheniyu";
+import KomandaProekta from "../pages/courses/Komanda-proekta";
+import UpravlenieRiskami from "../pages/courses/upravlenie-riskami";
+import KommunikaciiNaProekte from "../pages/courses/kommunikacii-na-proekte";
+import UpravlenieKachestvom from "../pages/courses/upravlenie-kachestvom";
+import ItogiKursa from "../pages/courses/itogi-kursa";
+import OsnovyBiznesAnalitiki from "../pages/courses/osnovy-biznes-analitiki";
 
 export const navlist = [
   {
@@ -98,6 +108,57 @@ export const PUBLIC_ROUTES = [
     id: 12,
     route: '/courses/intstrumenty-proektnogo-managera/',
     page: <InstrumentyProektnogoManagera />
+  },
+  {
+    id: 13,
+    route: '/courses/metodologii-upravleniya-proektami/',
+    page: <MetodologiiUpravleniyaProektami />
+  },
+  {
+    id: 14,
+    route: '/courses/nachalo-proekta/',
+    page: <NachaloProekta/>
+  },
+  {
+    id: 15,
+    route: '/courses/planirovanie-proekta/',
+    page: <PlanirovanieProekta />
+  },
+  {
+    id: 16,
+    route: '/courses/upravlenie-trebovaniyamu-k-programmnomu-obespecheniyu/',
+    page: <TrebovaniyaKPO />
+  },
+  {
+    id: 17, 
+    route: '/courses/komanda-proekta-raspredelenie-rolei-v-komande/',
+    page: <KomandaProekta />
+  },
+  {
+    id: 18,
+    route: '/courses/upravlenie-riskami/',
+    page: <UpravlenieRiskami />
+  },
+  {
+    id: 19,
+    route: '/courses/kommunikacii-na-proekte/',
+    page: <KommunikaciiNaProekte />
+  },
+  {
+    id: 20,
+    route: '/courses/upravlenie-kachestvom/',
+    page: <UpravlenieKachestvom />
+  }
+  ,
+  {
+    id: 21,
+    route: '/courses/itogi-kursa/',
+    page: <ItogiKursa />
+  },
+  {
+    id: 21,
+    route: '/courses/osnovy-biznes-analitiki/',
+    page: <OsnovyBiznesAnalitiki />
   }
 ]
 

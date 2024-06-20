@@ -159,6 +159,69 @@ const Courses = () => {
                 <h3>10. Модуль 13. Операционный запуск и закрытие проекта (2 задания)</h3>
                 <h4>13 уроков</h4>
               </div>
+            </div> :
+            num === 4 ?
+            <div className={c.module}>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/itogi-kursa/')}
+              >
+                <h3>1. Итоги курса</h3>
+                <h4>2 урока</h4>
+              </div>
+            </div> 
+            :
+            num === 5 ?
+            <div className={c.module}>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/osnovy-biznes-analitiki/')}
+              >
+                <h3>1. Модуль 16. Основы бизнес-аналитики (6 заданий)</h3>
+                <h4>5 уроков</h4>
+              </div>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/osnovy-produktovogo-myshleniya/')}
+              >
+                <h3>2.  Модуль 17. Основы продуктового мышления (1 задание)</h3>
+                <h4>14 уроков</h4>
+              </div>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/osnovy-ux/')}
+              >
+                <h3>3. Модуль 18. UX-дизайн. Основы (2 задания)</h3>
+                <h4>8 уроков</h4>
+              </div>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/osnovy-ui/')}
+              >
+                <h3>4. Модуль 19. UI-дизайн. Основы (8 задания)</h3>
+                <h4>7 уроков</h4>
+              </div>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/bazovye-poniatia-v-razrabotke/')}
+              >
+                <h3>5. Модуль 20. Базовые понятия в разработке (2 задания)</h3>
+                <h4>6 уроков</h4>
+              </div>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/razrabotka-mobilnyh-prilozheniy/')}
+              >
+                <h3>6. Модуль 21. Разработка мобильных приложений (2 задания)</h3>
+                <h4>6 уроков</h4>
+              </div>
+              <div 
+                className={c.time}
+                onClick={() => Navigate('/courses/rabota-s-virtualnoy-komandoi/')}
+              >
+                <h3>7. Модуль 22. Работа с виртуальной командой (6 заданий)</h3>
+                <h4>8 уроков</h4>
+              </div>
             </div> 
             :
             null

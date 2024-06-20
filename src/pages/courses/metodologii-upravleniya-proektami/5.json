@@ -1,0 +1,55 @@
+{
+"https:\/\/lms.skillfactory.ru\/xbl":[
+ {
+  "Column1": "Канбан",
+  "websitescraper-selected-row1": "Цель подхода — улучшение",
+  "websitescraper-selected-row2": "Получать готовый качественный продукт вовремя",
+  "websitescraper-selected-row3": "картинка"
+ },
+ {
+  "Column1": "Ускорение рабочих процессов"
+ },
+ {
+  "Column1": "Принципы Канбан",
+  "websitescraper-selected-row1": "1. Визуализируйте поток",
+  "websitescraper-selected-row2": "2. Ограничивайте незавершённую работу (WIP)",
+  "websitescraper-selected-row3": "3. Измеряйте и оптимизируйте среднее время выполнения задачи \/ время прохода \/ время производства (lead time)"
+ },
+ {
+  "Column1": "Визуализация",
+  "websitescraper-selected-row1": "картинка"
+ },
+ {
+  "Column1": "Канбан-доска (доска задач)",
+  "websitescraper-selected-row1": "«Процессы на виду»",
+  "websitescraper-selected-row2": "Kanban-карточки ― это задачи, которые движутся по потоку и перетекают в другие столбцы в зависимости от их состояния"
+ },
+ {
+  "Column1": "Управление результатом",
+  "websitescraper-selected-row1": "Получить результат точно в срок возможно, если контролировать нагрузку команды. Для этого нужно контролировать ключевые метрики и соблюдать лимиты"
+ },
+ {
+  "Column1": "Метрики",
+  "websitescraper-selected-row1": "Время производства",
+  "websitescraper-selected-row2": "Эффективность потока",
+  "websitescraper-selected-row3": "Пропускная способность"
+ },
+ {
+  "Column1": "Время производства",
+  "websitescraper-selected-row1": "картинка"
+ },
+ {
+  "Column1": "Незавершенная работа (Work in progress, WIP)",
+  "websitescraper-selected-row1": "картинка"
+ },
+ {
+  "Column1": "Пропускная способность и лимиты",
+  "websitescraper-selected-row1": "Пропускная способность — это количество задач, которое команда реально способна",
+  "websitescraper-selected-row2": "Лимиты — это ограничение по количеству одновременных задач на этапе"
+ },
+ {
+  "Column1": "Agile vs. Waterfall",
+  "websitescraper-selected-row1": "картинка"
+ }
+]
+}
