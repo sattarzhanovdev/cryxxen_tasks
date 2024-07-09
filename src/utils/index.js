@@ -42,7 +42,7 @@ export const navlist = [
   },
 ]
 
-export const TOKEN = 'perm:cG1fc2F0dGFyemhhbm92.NTktMQ==.z1DDGhtUVk6PCczLQhGJHbI8qQCpdr'
+export const TOKEN = 'perm:aHBfZ3JhY2hldg==.NTktNg==.Vprdwp7YuN58PbvXRwWfoNBtFZEad7'
 export const api_url = 'https://cryxxen.youtrack.cloud/api'
 export const headers = {
   'Authorization': `Bearer ${TOKEN}`
