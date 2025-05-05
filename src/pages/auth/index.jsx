@@ -12,22 +12,9 @@ const Auth = () => {
   const Navigate = useNavigate()
 
   const check = (data) => {
-    api.getProjectsPasswords()
-      .then(res => {
-        const project = res.data.find(item => item.login === data.name && item.password === data.password)
-        console.log(project);
-        if(data.name === 'admin' && data.password === 'admin'){
-          Navigate('/admin/')
-        }else{
-          if(!project){
-            setText('Неверный пароль, или нету проекта с таким названием!')
-          }else{
-            setText('Успешно!')
-            localStorage.setItem('projectAuth', project.name)
-            Navigate(project.path)
-          }
-        }
-      })
+    if(data.name === 'admin' && data.password === 'admin'){
+      Navigate('/admin/')
+    }
   }
 
 

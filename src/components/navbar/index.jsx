@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
     <div className={c.navbar}>
-      <h1>CRYXXEN</h1>
+      <h1>AtaBase</h1>
       <ul>
         {
           navlist.map((item, i) => (

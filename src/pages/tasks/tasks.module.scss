@@ -95,6 +95,13 @@
         text-align: left;
         padding: 10px;
         border: 1px solid black;
+
+        img{
+          width: 24px;
+          height: 24px;
+          border-radius: 50px;
+        }
+
         &.frontend{
           background: orange;
           color: white;
@@ -116,6 +123,22 @@
           color: white;
         }
 
+        &.test{
+          background: greenyellow;
+        }
+
+        &.done{
+          background: green;
+        }
+
+        &.inProgress{
+          background: orange;
+        }
+
+        &.new{
+          background: darkblue;
+          color: white;
+        }
       }
     }
   }

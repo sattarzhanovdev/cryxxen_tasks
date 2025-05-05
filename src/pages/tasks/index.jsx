@@ -21,36 +21,32 @@ const Tasks = () => {
 
   React.useEffect(() => {
     const auth = localStorage.getItem('projectAuth')
-
-    if(auth !== name){
-      Navigate('/auth/')
-    }else{
-      api.getTasks()
-        .then(res => {
-          const projectsTasks = res.data.filter(item => item.project?.name === name)
-          setTasks(projectsTasks)
-          api.getActivities(res.data[0].id) 
-            .then(res => console.log(res.data))
-          if(params.status === 'Все'){
-            if(params.type !== "Все"){
-              const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
-              setTasks(filteredTasks)
-            }else{
-              setTasks(projectsTasks)
-            }
-          }else if(params.type === 'Все'){
-            if(params.status !== "Все"){
-              const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status)
-              setTasks(filteredTasks)
-            }else{
-              setTasks(projectsTasks)
-            }
-          }else{
-            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status && item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
+    api.getTasks()
+      .then(res => {
+        const projectsTasks = res.data.filter(item => item.project?.name === name)
+        setTasks(projectsTasks)
+        api.getActivities(res.data[0].id) 
+          .then(res => console.log(res.data))
+        if(params.status === 'Все'){
+          if(params.type !== "Все"){
+            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
             setTasks(filteredTasks)
+          }else{
+            setTasks(projectsTasks)
           }
-        })
-    }
+        }else if(params.type === 'Все'){
+          if(params.status !== "Все"){
+            const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status)
+            setTasks(filteredTasks)
+          }else{
+            setTasks(projectsTasks)
+          }
+        }else{
+          const filteredTasks = projectsTasks?.filter(item => item.customFields.find(val => val.name === 'State')?.value?.name === params.status && item.customFields.find(val => val.name === 'Вид задачи')?.value?.name === params.type)
+          setTasks(filteredTasks)
+        }
+      })
+  
 
     console.log(tasks);
   }, [dep])
@@ -78,8 +74,10 @@ const Tasks = () => {
   })
 
   const toTask = (id) => {
-    window.open(`https://cryxxen.youtrack.cloud/issue/${id}`)
+    window.open(`https://atabase.youtrack.cloud/issue/${id}`)
   }
+
+  console.log(tasks);
 
   return (
     <div className={c.tasks}>
@@ -150,18 +148,16 @@ const Tasks = () => {
         <tr>
           <th>№</th>
           <th>Название</th>
-          <th>Дата начала</th>
           <th>Срок</th>
           <th>Оценка</th>
           <th>Затраченное время</th>
           <th>Постановщик</th>
-          <th>{name !== 'CRYXXEN' ? 'Разработчик' : 'Исполнитель'}</th>
+          <th>Исполнитель</th>
           <th>Тип задачи</th>
           <th>Вид задачи</th>
           <th>Статус</th>
         </tr>
         {
-          name !== 'CRYXXEN' ?
           tasks?.map((item, i) => (
             <tr key={i}>
               <td>
@@ -169,9 +165,6 @@ const Tasks = () => {
               </td>
               <td onClick={() => toTask(item.id)}>
                 {item.summary}
-              </td>
-              <td>
-                {convertToDate(item.customFields?.find(item => item.name === 'Дата начала')?.value)}  
               </td>
               <td>
                 {convertToDate(item.customFields?.find(item => item.name === 'Due Date')?.value)}  
@@ -183,123 +176,63 @@ const Tasks = () => {
                 {item.customFields?.find(item => item.name === 'Затраченное время')?.value?.presentation }  
               </td>
               <td>
-                {item.customFields?.find(item => item.name === 'Постановщик')?.value?.name }  
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+                  <img
+                    src={`https://atabase.youtrack.cloud${item.customFields?.find(f => f.name === 'Постановщик')?.value?.avatarUrl}`}
+                    alt=""
+                    style={{ width: 24, height: 24, borderRadius: '50%', objectFit: 'cover' }}
+                  />
+                  {item.customFields?.find(f => f.name === 'Постановщик')?.value?.name}
+                </div>
+              </td>
+
+              <td>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <img
+                    src={`https://atabase.youtrack.cloud${item.customFields?.find(f => f.name === 'Assignee')?.value?.avatarUrl}`}
+                    alt=""
+                    style={{ width: 20, height: 20, borderRadius: '50%', objectFit: 'cover'}}
+                  />
+                  {item.customFields?.find(f => f.name === 'Assignee')?.value?.name}
+                </div>
               </td>
               <td>
-                {item.customFields?.find(item => item.name === 'Разработчик')?.value?.name }  
-              </td>
-              <td>
-                {item.customFields?.find(item => item.name === 'Type')?.value?.localizedName }  
+                {item.customFields?.find(item => item.name === 'Тип задачи')?.value?.name }  
               </td>
               <td 
                 className={
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Frontend' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Frontend' ? 
                   c.frontend : 
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Backend' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Backend' ? 
                   c.backend :
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Design' ?
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Design' ?
                   c.design : 
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Analytics' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Analytics' ? 
                   c.analytics :
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Testing' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Testing' ? 
                   c.testing :
                   ''
                 }
               >
-                {item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name }  
+                {item.customFields?.find(item => item.name === 'Type')?.value?.name }  
               </td>
               <td
-                // className={
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'На тестирование' ? 
-                //   c.test : 
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Приемка' ? 
-                //   c.show :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'В работе' ?
-                //   c.design : 
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'К работе' ? 
-                //   c.analytics :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Закрыто' ? 
-                //   c.testing :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Новая' ? 
-                //   c.testing :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Релиз' ? 
-                //   c.release :
-                //   ''
-                // }
-              >
-                {item.customFields?.find(item => item.name === 'State')?.value?.name }  
-              </td>
-            </tr>
-          )) :
-          tasks?.map((item, i) => (
-            <tr key={i}>
-              <td>
-                {i+1}
-              </td>
-              <td onClick={() => toTask(item.id)}>
-                {item.summary}
-              </td>
-              <td>
-                {convertToDate(item.customFields?.find(item => item.name === 'Дата начала')?.value)}  
-              </td>
-              <td>
-                {convertToDate(item.customFields?.find(item => item.name === 'Due Date')?.value)}  
-              </td>
-              <td>
-                {item.customFields?.find(item => item.name === 'Оценка')?.value?.minutes }  
-              </td>
-              <td>
-                {item.customFields?.find(item => item.name === 'Затраченное время')?.value?.presentation }  
-              </td>
-              <td>
-                {item.customFields?.find(item => item.name === 'Постановщик')?.value?.name }  
-              </td>
-              <td>
-                {item.customFields?.find(item => item.name === 'Assignee')?.value?.name }  
-              </td>
-              <td>
-                {item.customFields?.find(item => item.name === 'Type')?.value?.localizedName }  
-              </td>
-              <td 
                 className={
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Frontend' ? 
-                  c.frontend : 
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Backend' ? 
-                  c.backend :
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Design' ?
-                  c.design : 
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Analytics' ? 
-                  c.analytics :
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Testing' ? 
-                  c.testing :
+                  item.customFields?.find(item => item.name === 'Stage')?.value?.name === 'На тестировании' ? 
+                  c.test : 
+                  item.customFields?.find(item => item.name === 'Stage')?.value?.name === 'В работе' ?
+                  c.inProgress : 
+                  item.customFields?.find(item => item.name === 'Stage')?.value?.name === 'Сделано' ? 
+                  c.done :
+                  item.customFields?.find(item => item.name === 'Stage')?.value?.name === 'Новый' ? 
+                  c.new :
                   ''
                 }
               >
-                {item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name }  
-              </td>
-              <td
-                // className={
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'На тестирование' ? 
-                //   c.test : 
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Приемка' ? 
-                //   c.show :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'В работе' ?
-                //   c.design : 
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'К работе' ? 
-                //   c.analytics :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Закрыто' ? 
-                //   c.testing :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Новая' ? 
-                //   c.testing :
-                //   item.customFields?.find(item => item.name === 'State')?.value?.name === 'Релиз' ? 
-                //   c.release :
-                //   ''
-                // }
-              >
-                {item.customFields?.find(item => item.name === 'State')?.value?.name }  
+                {item.customFields?.find(item => item.name === 'Stage')?.value?.name }  
               </td>
             </tr>
-          ))
+          )) 
         }
       </table>
     </div>

@@ -82,7 +82,7 @@ const Reports = () => {
   });
 
   const toTask = (id) => {
-    window.open(`https://cryxxen.youtrack.cloud/issue/${id}`)
+    window.open(`https://atabase.youtrack.cloud/issue/${id}`)
   }
 
   return (
@@ -98,6 +98,7 @@ const Reports = () => {
               setType(e.target.value)
             }} 
           >
+            <option disabled selected>Работник</option>
             {
               workers?.map((item, i) => (
                 <option key={i}>{item.name}</option>
@@ -112,19 +113,10 @@ const Reports = () => {
             }} 
           >
             <option selected>Все</option>
-            <option>В ожидании</option>
-            <option>Новая</option>
-            <option>На аналитику</option>
-            <option>Analitycs</option>
-            <option>К работе</option>
+            <option>Новый</option>
             <option>В работе</option>
-            <option>code review</option>
-            <option>На тестирование</option>
-            <option>Тестирование</option>
-            <option>На доработку</option>
-            <option>Приемка</option>
-            <option>Релиз</option>
-            <option>Закрыто</option>
+            <option>На тестировании</option>
+            <option>Сделано</option>
           </select> 
 
           <select
@@ -145,7 +137,6 @@ const Reports = () => {
           <th>№</th>
           <th>Проект</th>
           <th>Название</th>
-          <th>Дата начала</th>
           <th>Срок</th>
           <th>Статус</th>
           <th>Тип задачи</th>
@@ -166,33 +157,30 @@ const Reports = () => {
                 {item.summary}
               </td>
               <td>
-                {convertToDate(item.customFields?.find(item => item.name === 'Дата начала')?.value)}  
-              </td>
-              <td>
                 {convertToDate(item.customFields?.find(item => item.name === 'Due Date')?.value)}  
               </td>
               <td>
-                {item.customFields?.find(item => item.name === 'State')?.value?.name }  
+                {item.customFields?.find(item => item.name === 'Stage')?.value?.name }  
               </td>
               <td>
-                {item.customFields?.find(item => item.name === 'Type')?.value?.localizedName }  
+                {item.customFields?.find(item => item.name === 'Тип задачи')?.value?.name }  
               </td>
               <td 
                 className={
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Frontend' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Frontend' ? 
                   c.frontend : 
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Backend' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Backend' ? 
                   c.backend :
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Design' ?
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Design' ?
                   c.design : 
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Analytics' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Analytics' ? 
                   c.analytics :
-                  item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name === 'Testing' ? 
+                  item.customFields?.find(item => item.name === 'Type')?.value?.name === 'Testing' ? 
                   c.testing :
                   ''
                 }
               >
-                {item.customFields?.find(item => item.name === 'Вид задачи')?.value?.name }  
+                {item.customFields?.find(item => item.name === 'Type')?.value?.name }  
               </td>
               <td>
                 {item.customFields?.find(item => item.name === 'Assignee')?.value?.name }  
@@ -204,7 +192,6 @@ const Reports = () => {
           ))
         }
         <tr>
-          <th></th>
           <th></th>
           <th></th>
           <th></th>

@@ -42,7 +42,10 @@ const Workers = () => {
               <td>
                 {i+1}
               </td>
-              <td>{item.name}</td>
+              <td>
+                <img src={item.avatarUrl} alt="" />
+                {item.name}
+              </td>
               <td>{item.login}</td>
               <td className={item.online === false ? c.no : c.yes}>{item.online === false ? "Не в сети" : "В сети"}</td>
             </tr>
